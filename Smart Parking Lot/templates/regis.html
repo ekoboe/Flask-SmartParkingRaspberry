@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block page_title %}RFID Control{% endblock %}
+{% block title %}RFID Control{% endblock %}
+{% block nav_item_rfid %}active{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+        <div class="col-sm">
+            <div class="card border-left-success shadow h-100 py-3">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Register Tag</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-tags fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div><hr>
+                <div class="text-center">
+                    <a href="/regis" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Register</a>
+                </div>
+            </div>
+        </div>
+        <br>
+
+    <!-- Earnings (Monthly) Card Example -->
+        <div class="col-sm">
+            <div class="card border-left-success shadow h-100 py-3">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Find Tag</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-tag fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div><hr>
+                <div class="text-center">
+                    <a href="/baca" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Find</a>
+                </div>
+            </div>
+        </div>
+       </div><hr>
+          <div class="col-12 col-md-8"> 
+            <div class="small-box bg-light">
+                <div class="inner">
+                  <h2>Registration</h2>
+                  <form action="/daftar" method="post">
+                    <div class="form-group">
+                      <label>Masukkan nama</label><br>
+                      <input type="text" class="form-control" placeholder="Full name" name="text">
+                    </div>
+                    <div class="col-4">
+                      <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </div>
+                  </form>
+                      <p>{% for mesg in get_flashed_messages() %}
+                      <h4>{{ mesg }}</h4>
+                      {% endfor %}</p>
+                </div>
+            </div>
+          </div>
+       </div>
+    </div>
+</div>
+
+{% block chart %} {% endblock %}
+  {% endblock %}
+

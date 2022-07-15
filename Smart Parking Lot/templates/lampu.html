@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <center>
+        <h1 style="color: black; font-family:courier;"> STATUS KONTROL </h1>
+        <h3> LED ==> {{ led }}</h3>
+        <h3> BUZZER==> {{ brangkas }}</h3>
+        <br>
+        <h2> PERINTAH </h2>
+        <h3> LED Ctrl ==>
+            <a href="/led/on" class="btn btn-success">TURN ON</a>
+            <a href="/led/off" class="btn btn-danger">TURN OFF</a>
+        </h3>
+        <h3> BUZZER Ctrl ==>
+            <a href="/brangkas/on" class="btn btn-success">TURN ON</a>
+            <a href="/brangkas/off" class="btn btn-danger">TURN OFF</a>
+        </h3>
+    </center>
+</div>
+{% block chart %} {% endblock %}
+{% endblock %}

@@ -1,0 +1,28 @@
+.wik{
+    transition: 0.3s;
+    padding: 5x
+    border: 1px solid #FF5733;
+    border-radius:  25px;
+    width: 60px;
+    height: 28px;
+    text-align: center;
+}
+
+.wik:hover{
+    color: #fff;
+    background: #28a745;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}

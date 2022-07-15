@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block page_title %}Delete Fingerprint{% endblock %}
+{% block title %}Delete Fingerprint{% endblock %}
+{% block nav_item_control %}active{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+        <div class="col-sm">
+            <div class="card border-left-success shadow h-100 py-3">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Create Fingerprint</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-magnifying-glass fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div><hr>
+                <div class="text-center">
+                    <a href="/enrollf" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create</a>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-sm">
+            <div class="card border-left-success shadow h-100 py-3">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Find Fingerprint</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-circle-plus fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div><hr>
+                <div class="text-center">
+                    <a href="/find" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Find</a>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-sm">
+            <div class="card border-left-success shadow h-100 py-3">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Delete Fngerprint</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-trash-can fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div><hr>
+                <div class="text-center">
+                    <a href="/del" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Delete</a>
+                </div>
+            </div>
+        </div>
+   </div><hr>
+       <div class="col-12 col-md-8"> 
+           <div class="small-box bg-light" style="height: 210px;">
+                <div class="inner">
+                  <h2>Delete template</h2>
+                  <form action="/delete" method="post">
+                      <input type="number" step="1"
+                      min="1" max="127" class="form-control" placeholder="Input template" name="template"> 
+                      <button type="submit" class="btn btn-danger mt-2">Delete</button>
+                  </form>
+                  <hr>
+                  <p>{% for mesg in get_flashed_messages() %}
+                  <h4>{{ mesg }}</h4>
+                  {% endfor %}</p>
+                </div>
+          </div>
+      </div>
+</div>
+</div>
+
+{% block chart %} {% endblock %}
+  {% endblock %}
+

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block page_title %}Scan Fingerprint{% endblock %}
+{% block title %}Scan Fingerprint{% endblock %}
+{% block nav_item_scan %}active{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+          <div class="card border-left-success shadow h-100 py-3">
+            <div class="card text-center">
+                <div class="card-header">
+                    <div class="icon">
+                        <i class="fas fa-road-barrier fa-4x"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Silahkan tap kartu RFID untuk membuka gerbang dan presensi.</p>
+                    <a href="/buka" class="btn btn-success">Scan RFID</a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card border-left-success shadow h-100 py-3">
+            <div class="small-box bg-light" style="height: 200px;">
+                <div class="card-body">
+                    <p>
+                    <h3>Gerbang dibuka oleh: </h3></p>
+                    <p>{% for mesg in get_flashed_messages() %}
+                    <h4>{{ mesg }}</h4>
+                    {% endfor %}</p>
+                </div>
+                <div class="card text-center">
+                    <i class="ion ion-power fa-4x"></i>
+                </div>
+            </div>
+          </div>
+        </div>
+        
+    </div><hr>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+              <div class="card border-left-success shadow h-100 py-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="icon">
+                            <i class="fas fa-user-tie fa-4x"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Scan jari untuk presensi pulang.</p>
+                        <a href="/pulangkepsek" class="btn btn-info">Kepala Sekolah</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card border-left-success shadow h-100 py-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="icon">
+                            <i class="fas fa-chalkboard-user fa-4x"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Scan jari untuk presensi pulang.</p>
+                        <a href="/pulangguru" class="btn btn-primary">Guru</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+        {% block chart %} {% endblock %}
+        {% endblock %}
+    </div>
+</div>

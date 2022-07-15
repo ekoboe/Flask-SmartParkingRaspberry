@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block page_title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../static/skydash/vendors/feather/feather.css">
+    <link rel="stylesheet" href="../static/skydash/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/skydash/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../static/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="../static/skydash/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="../static/skydash/js/select.dataTables.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../static/skydash/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../static/skydash/images/favicon.png"/>
+    <link rel="stylesheet" href="../static/skydash/css/weather.css"/>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+    
+    <script src='https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js'></script>
+
+    
+</head>
+<body onload="startTime()">
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="../static/skydash/images/logo.png"
+                                                                           class="mr-2" alt="logo"/></a>
+            <a class="navbar-brand brand-logo-mini" href="index.html" ><img src="../static/skydash/images/logo-mini.png"
+                                                                           alt="logo"/></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <span class="icon-menu"></span>
+            </button>
+            <ul class="navbar-nav mr-lg-2">
+                <li class="nav-item nav-search d-none d-lg-block">
+                    <div class="input-group">
+                        <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+                        </div>
+                        <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now"
+                               aria-label="search" aria-describedby="search">
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">{{
+                        session.username }}
+                        <img src="../static/skydash/images/faces/face2.jpg" alt="profile"/>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a href="/logout" class="dropdown-item">
+                            <i class="ti-power-off text-primary"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                <span class="icon-menu"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">
+                        <i class="icon-grid menu-icon"></i>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/scan">
+                        <i class="fas fa-barcode menu-icon"></i>
+                        <span class="menu-title">System Control</span>
+                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fingerprint">
+                        <i class="fas fa-fingerprint menu-icon"></i>
+                        <span class="menu-title">Fingerprint Control</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rfid">
+                        <i class="fas fa-id-card menu-icon"></i>
+                        <span class="menu-title">RFID Control</span>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="/graph">
+                        <i class="fas fa-chart-column menu-icon"></i>
+                        <span class="menu-title">Graph</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mt-4 mb-3">
+                            <div class="col-sm-6">
+                                <h1 class="m-0">{% block title %} {% endblock %}</h1>
+                            </div><!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="float-sm-right">
+                                    <div class="flex-md-grow-1 flex-xl-grow-0">Time:
+                                        <button class="btn btn-sm btn-light bg-white" type="button"
+                                        <i class="mdi mdi-calendar">
+                                            <span id="clock"></span>
+                                            </button>
+                                    </div>
+                                </ol>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        {% block content %} {% endblock %}
+                    </div>
+                    <!-- /.row (main row) -->
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<!-- content-wrapper ends -->
+<!-- partial -->
+</div>
+<!-- main-panel ends -->
+</div>
+<!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script src="../static/skydash/vendors/js/vendor.bundle.base.js"></script>
+<script src="../static/skydash/vendors/chart.js/Chart.min.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="../static/skydash/vendors/chart.js/Chart.min.js"></script>
+<script src="../static/skydash/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="../static/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<script src="../static/skydash/js/dataTables.select.min.js"></script>
+
+<!-- End plugin js for this page -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../static/skydash/js/weather.js"></script>
+<script type="text/javascript" src="../static/skydash/js/country-list.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- jQuery -->
+<script src="../static/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../static/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- inject:js -->
+<script src="../static/skydash/js/off-canvas.js"></script>
+<script src="../static/skydash/js/hoverable-collapse.js"></script>
+<script src="../static/skydash/js/template.js"></script>
+<script src="../static/skydash/js/settings.js"></script>
+<script src="../static/skydash/js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="../static/skydash/js/chart.js"></script>
+<script src="../static/skydash/js/dashboard.js"></script>
+<script src="../static/skydash/js/Chart.roundedBarCharts.js"></script>
+
+<!-- End custom js for this page-->
+
+<script type="text/javascript">
+        var clockElement = document.getElementById('clock');
+
+        function clock() {
+            clockElement.textContent = new Date().toString().slice(0, 25);;
+        }
+        setInterval(clock, 1000);
+</script>
+</body>
+
+</html>
+
